@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MewAucs - User Guide</title>
+  <link rel="icon" href="https://crazy-ledend.github.io/Aucs-Guide/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #1a1b26;
+            --card-bg: #24283b;
+            --text-color: #c0caf5;
+            --header-color: #ffffff;
+            --accent-blue: #7aa2f7;
+            --accent-orange: #ff9e64;
+            --accent-green: #9ece6a;
+            --border-color: #414868;
+            --code-bg: #1f2335;
+            --code-text: #a9b1d6;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.8;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3em;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--header-color);
+            margin-bottom: 0.2em;
+        }
+        
+        header p {
+            font-size: 1.2rem;
+            color: var(--accent-blue);
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--header-color);
+            margin-top: 1.5em;
+            margin-bottom: 1em;
+            padding-bottom: 0.4em;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 2em;
+        }
+
+        .tab-link {
+            padding: 1em 1.5em;
+            cursor: pointer;
+            border: none;
+            background: none;
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .tab-link::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-blue);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .tab-link.active {
+            color: var(--header-color);
+        }
+        
+        .tab-link.active::after {
+            transform: scaleX(1);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 2em;
+            margin-bottom: 2em;
+            border: 1px solid var(--border-color);
+        }
+
+        .rules-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .rules-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 1em;
+        }
+
+        .rules-list li::before {
+            content: '↪';
+            position: absolute;
+            left: 0;
+            top: 0px;
+            color: var(--accent-blue);
+            font-weight: 700;
+        }
+        
+        .rules-list li.final-rule::before {
+            content: '↩';
+        }
+
+        .flow-list {
+            list-style: none;
+            counter-reset: flow-counter;
+            padding-left: 0;
+        }
+
+        .flow-list li {
+            position: relative;
+            padding-left: 40px;
+            margin-bottom: 1em;
+            counter-increment: flow-counter;
+        }
+
+        .flow-list li::before {
+            content: counter(flow-counter);
+            position: absolute;
+            left: 0;
+            top: -2px;
+            width: 28px;
+            height: 28px;
+            background-color: var(--border-color);
+            color: var(--header-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+            font-weight: 700;
+        }
+        
+        .role-guides-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2em;
+        }
+        
+        @media (min-width: 768px) {
+            .role-guides-container {
+                 grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .role-guide {
+            padding: 2em;
+            border-top: 4px solid;
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            height: 100%;
+        }
+        
+        .role-guide.auctioneer {
+            border-color: var(--accent-orange);
+        }
+        
+        .role-guide.bidder {
+            border-color: var(--accent-green);
+        }
+        
+        .role-guide h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1em;
+            color: var(--header-color);
+        }
+        
+        .role-guide h4 {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-weight: 500;
+        }
+        
+        code {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 0.3em 0.6em;
+            border-radius: 6px;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>MewAucs</h1>
+            <p>Your Guide to Pokémon Auctions</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-link active" data-tab="rules">Auction Rules</button>
+            <button class="tab-link" data-tab="flow">Auction Flow</button>
+            <button class="tab-link" data-tab="roles">Roles & Commands</button>
+        </div>
+
+        <div id="rules" class="tab-content active">
+            <div class="card">
+                <h2>How to Auction</h2>
+                <ul class="rules-list">
+                    <li>Ping any auctioneer and wait for a 👍 before sending details (min bid, increment, buyout, time, etc).</li>
+                    <li>Don't spam ping auctioneers.</li>
+                    <li>If there is no response in 2 hours, you may ping another auctioneer.</li>
+                    <li>Pokémon cannot be withdrawn after receiving a bid.</li>
+                    <li class="final-rule">No sniping (bidding in the last 10 minutes) — offenders will be punished.</li>
+                </ul>
+            </div>
+            
+            <div class="card">
+                <h2>Pokémon Standards</h2>
+                <ul class="rules-list">
+                    <li>Minimum Fenta+ required (Quads are allowed if 90+ IVs).</li>
+                    <li>For Ditto breeds: Trips (70+ IVs) and above.</li>
+                    <li>Shinies, gleams, rads, shadows, and skins of any IVs are allowed.</li>
+                    <li class="final-rule">Don't list Pokémon under 40m value for more than 24 hours.</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div id="flow" class="tab-content">
+             <div class="card">
+                <h2>Auction Flow</h2>
+                <ol class="flow-list">
+                    <li>Once a Pokémon is auctioned, it is held by the bot, not the auctioneer.</li>
+                    <li>Upon a bid, the amount is deducted from the bidder's wallet.</li>
+                    <li>In case of an outbid, the bid of the previous bidder is refunded instantly.</li>
+                    <li>When the auction ends, the winner receives the Pokémon automatically.</li>
+                    <li>The final bid amount is credited to the auctioneer's wallet.</li>
+                    <li>The auctioneer sends the payment (after any cuts) to the Pokémon's original owner.</li>
+                    <li class="final-rule">The auction is now complete.</li>
+                </ol>
+            </div>
+        </div>
+
+        <div id="roles" class="tab-content">
+            <h2>Roles & Commands</h2>
+            <div class="role-guides-container">
+                <div class="role-guide auctioneer">
+                    <h3>👨‍⚖️ Auctioneer Guide</h3>
+                    <h4>Slash Commands</h4>
+                    <p><code>/auction</code>, <code>/edit</code>, <code>/endearly</code></p>
+                    <h4>Rules</h4>
+                    <ul class="rules-list">
+                        <li>You may decline an auction request.</li>
+                        <li>You may end auctions early at the owner's request.</li>
+                        <li>You may edit auctions on the owner's valid request.</li>
+                        <li>Cuts (if any) must be discussed before starting the auction.</li>
+                        <li>Auctioneers can't have more than 4 active auctions at a time.</li>
+                        <li class="final-rule">You cannot break the Pokémon standards rules.</li>
+                    </ul>
+                </div>
+                
+                <div class="role-guide bidder">
+                    <h3>🎯 Bidder Guide</h3>
+                    <h4>Slash Commands</h4>
+                    <p><code>/bid</code>, <code>/list</code>, <code>/profile</code></p>
+                    <h4>Notes</h4>
+                    <ul class="rules-list">
+                        <li>Place your bid using the <code>/bid</code> command.</li>
+                        <li>View all active auctions with <code>/list</code>.</li>
+                        <li>Track your wins and toggle outbid notifications with <code>/profile</code>.</li>
+                        <li>Users can't have more than 3 of their Pokémon auctioned at a time.</li>
+                        <li class="final-rule">No sniping in the last 5 minutes!</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const tabs = document.querySelectorAll('.tab-link');
+        const contents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and content panels
+                tabs.forEach(item => item.classList.remove('active'));
+                contents.forEach(item => item.classList.remove('active'));
+
+                // Add active class to the clicked tab and its corresponding content
+                tab.classList.add('active');
+                const targetContent = document.getElementById(tab.dataset.tab);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
